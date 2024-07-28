@@ -38,10 +38,6 @@ public class FrontControllerServletV3 extends HttpServlet {
 
         // paramMap
         Map<String, String> paramMap = createParamMap(request);
-        paramMap.forEach((k,v) -> {
-            System.out.println(k + ":" + v + "@@@@@@@");
-        });
-
         ModelView mv = controller.process(paramMap);
         // 컨트롤 호출하고, 모델 뷰 받는거까지 다 됐음. 이제 뭘 해야되냐?
         // 논리 이름을 물리 이름으로 바꿔야됨. 지금 이름만 넘어가는데, 이걸 가지고 MyView를 반환을 해줘야함.
@@ -60,26 +56,6 @@ public class FrontControllerServletV3 extends HttpServlet {
         Map<String,String> paramMap = new HashMap<>();
         request.getParameterNames().asIterator()
                 .forEachRemaining(paramName -> paramMap.put(paramName, request.getParameter(paramName)));
-
-        /*
-        request.getParameterNames():
-        요청에 포함된 모든 파라미터 이름을 Enumeration<String> 형태로 가져옵니다. 여기서는 username과 age가 포함됩니다.
-
-        .asIterator():
-        Enumeration 객체를 Iterator로 변환합니다. 이 Iterator는 username과 age라는 두 개의 요소를 가집니다.
-
-        .forEachRemaining(paramName -> ...):
-        Iterator는 두 번 반복되며, 각각의 반복에서 paramName은 한 번 username, 다음번에 age가 됩니다.
-
-        따라서, 주어진 예시에서 paramName은 처음에는 username, 다음에는 age가 됩니다.
-
-        이 과정을 통해서 paramMap에는 다음과 같은 내용이 저장됩니다:
-        paramMap.put("username", "a")
-        paramMap.put("age", "1")
-        결국 paramMap은 {"username": "a", "age": "1"}이 됩니다.
-         */
-
-
         return paramMap;
     }
 }
