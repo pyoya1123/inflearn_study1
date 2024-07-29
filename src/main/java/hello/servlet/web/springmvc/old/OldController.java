@@ -20,6 +20,7 @@ public class OldController implements Controller {
     @Override
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
         System.out.println("OldController.handleRequest");
-        return null;
+        return new ModelAndView("new-form"); // new-form이라는 스프링 빈이 없으니까 BeanNameViewResolver 은 패스가됨.
+        // 그래서 InternalResourceViewResolver가 jsp를 처리할 수 있는 뷰를 반환함.
     }
 }
