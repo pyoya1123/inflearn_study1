@@ -21,17 +21,8 @@ public class SpringMemberControllerV2 {
         return new ModelAndView("new-form");
     }
 
-    @RequestMapping
-    public ModelAndView save() {
-        List<Member> members = memberRepository.findAll();
-        ModelAndView mv = new ModelAndView("members");
-        mv.addObject("members",members);
-
-        return mv;
-    }
-
     @RequestMapping("/save")
-    public ModelAndView members(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView save(HttpServletRequest request, HttpServletResponse response) {
         // http request에서 막 getparameter로 해서 꺼내는게 아니라,
         // 프론트 컨트롤에서 그런건 다 처리하고, 이 맵에다가 요청 파라미터 정보를 다 넣어서 넘겨줄거임.
         // 그러면 여기선 단순히 꺼내서 쓰기만 하면 됨.
@@ -43,6 +34,15 @@ public class SpringMemberControllerV2 {
 
         ModelAndView mv = new ModelAndView("save-result");
         mv.addObject("member", member);
+        return mv;
+    }
+
+    @RequestMapping
+    public ModelAndView members() {
+        List<Member> members = memberRepository.findAll();
+        ModelAndView mv = new ModelAndView("members");
+        mv.addObject("members",members);
+
         return mv;
     }
 }
